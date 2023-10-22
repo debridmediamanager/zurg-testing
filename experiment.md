@@ -1,6 +1,35 @@
 # Experiment: Benchmarking zurg and rclone_rd
 
-On a freshly created directory, ensure that you have your zurg's `config.yml` as well as your `rclone.conf`.
+On a freshly created directory, ensure that you have your zurg's `config.yml` 
+
+```yaml
+zurg: v1
+
+token: TOKENHERE
+port: 9999
+concurrent_workers: 20
+check_for_changes_every_secs: 15
+info_cache_time_hours: 12
+
+directories:
+  all:
+    group: all
+    filters:
+      - regex: /.*/
+```
+
+as well as your `rclone.conf`
+
+```
+[zurg]
+type = webdav
+url = http://zurg:9999
+vendor = other
+
+[rd]
+type = realdebrid
+api_key = TOKENHERE
+```
 
 And then, create this `docker-compose.yml` file.
 
