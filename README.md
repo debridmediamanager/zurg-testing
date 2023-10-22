@@ -102,7 +102,7 @@ services:
       - zurgdata:/app/data
 
   rclone:
-    image: rclone/rclone:latest
+    image: debridmediamanager/rclone:latest
     restart: unless-stopped
     environment:
       TZ: Europe/Berlin
