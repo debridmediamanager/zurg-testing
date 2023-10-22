@@ -84,9 +84,11 @@ docker run -v ./config.yml:/app/config.yml -v zurgdata:/app/data -p 9999:9999 gh
 - Make sure you have config.yml on the current directory
 - It creates a `zurgdata` volume for the data files
 
-### with rclone for use with Plex, etc.
+### with rclone for use with Plex, etc. (HTTP mount)
 
 You will need to create a `media` directory to make the rclone mount work.
+
+**Why HTTP mount?** To circumvent performance bottlenecks of WebDav due to its synchronous nature
 
 ```yaml
 version: '3.8'
@@ -117,7 +119,7 @@ services:
       - apparmor:unconfined
     devices:
       - /dev/fuse:/dev/fuse:rwm
-    command: "mount zurg: /data --allow-non-empty --allow-other --uid 1000 --gid 1000 --dir-cache-time 1s --read-only"
+    command: "mount zurg: /data --allow-non-empty --allow-other --uid 1000 --gid 1000 --dir-cache-time 10s --read-only"
 
 volumes:
   zurgdata:
