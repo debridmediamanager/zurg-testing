@@ -22,9 +22,10 @@ as well as your `rclone.conf`
 
 ```
 [zurg]
-type = webdav
-url = http://zurg:9999
-vendor = other
+type = http
+url = http://zurg:9999/http
+no_head = true
+no_slash = true
 
 [rd]
 type = realdebrid
