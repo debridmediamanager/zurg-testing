@@ -59,10 +59,10 @@ after this we benchmark `rclone` (zurg) and `rclonerd` (rclone_rd)
 
 ```
 # benchmark: zurg
-time (for i in {1..10}; do (docker compose exec rclone ls -1R /data | wc -l); done)
+(for i in {1..10}; do time (docker compose exec rclone ls -1R /data | wc -l); done)
 
 # benchmark: rclone_rd
-time (for i in {1..10}; do (docker compose exec rclonerd ls -1R /data | wc -l); done)
+(for i in {1..10}; do time (docker compose exec rclonerd ls -1R /data | wc -l); done)
 ```
 
 And report the results to:
