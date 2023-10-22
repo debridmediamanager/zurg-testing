@@ -127,9 +127,10 @@ Together with this `docker-compose.yml` you will need this `rclone.conf` as well
 
 ```
 [zurg]
-type = webdav
-url = http://zurg:9999
-vendor = other
+type = http
+url = http://zurg:9999/http
+no_head = true
+no_slash = true
 
 ```
 
