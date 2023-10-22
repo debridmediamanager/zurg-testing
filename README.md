@@ -102,7 +102,7 @@ services:
       - zurgdata:/app/data
 
   rclone:
-    image: debridmediamanager/rclone:latest
+    image: rclone/rclone:latest
     restart: unless-stopped
     environment:
       TZ: Europe/Berlin
@@ -129,7 +129,7 @@ Together with this `docker-compose.yml` you will need this `rclone.conf` as well
 [zurg]
 type = http
 url = http://zurg:9999/http
-no_head = true
+no_head = false
 no_slash = true
 
 ```
