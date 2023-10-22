@@ -38,7 +38,7 @@ version: '3.8'
 
 services:
   zurg:
-    image: debridmediamanager/zurg:latest
+    image: ghcr.io/debridmediamanager/zurg-testing:latest
     restart: unless-stopped
     ports:
       - 9999
