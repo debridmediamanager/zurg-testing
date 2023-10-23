@@ -1,0 +1,33 @@
+# Zurg configuration version
+zurg: v1
+
+token: YOUR_RD_API_TOKEN # https://real-debrid.com/apitoken
+port: 9999
+concurrent_workers: 10
+check_for_changes_every_secs: 15
+info_cache_time_hours: 12
+
+# List of directory definitions and their filtering rules
+directories:
+  # Configuration for TV shows
+  shows:
+    group: media # directories on different groups have duplicates of the same torrent
+    filters:
+      - regex: /season[\s\.]?\d/i          # Capture torrent names with the term 'season' in any case
+      - regex: /saison[\s\.]?\d/i          # For non-English namings
+      - regex: /stagione[\s\.]?\d/i        # if there's french, there should be italian too
+      - regex: /s\d\d/i           # Capture common season notations like S01, S02, etc.
+      - regex: /\btv/i            # anything that has TV in it is a TV show, right?
+      - contains: complete
+      - contains: seasons
+
+  # Configuration for movies
+  movies:
+    group: media # because movies and shows are in the same group, and shows come first before movies, all torrents that doesn't fall into shows will fall into movies
+    filters:
+      - regex: /.*/ # you cannot leave a directory without filters because it will not have any torrents in it
+
+  "ALL MY STUFFS":
+    group: all           # notice the group now is "all", which means it will have all the torrents of shows+movies combined because this directory is alone in this group
+    filters:
+      - regex: /.*/
