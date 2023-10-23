@@ -5,7 +5,7 @@ services:
     image: ghcr.io/debridmediamanager/zurg-testing:latest
     restart: unless-stopped
     ports:
-      - 9999
+      - 9999:9999
     volumes:
       - ./config.yml:/app/config.yml
       - zurgdata:/app/data
