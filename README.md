@@ -35,6 +35,12 @@ concurrent_workers: 10 # the higher the number the faster zurg runs through your
 check_for_changes_every_secs: 15 # zurg polls real-debrid for changes in your library
 info_cache_time_hours: 12 # how long do we want to check if a torrent is still alive or dead? 12 to 24 hours is good enough
 
+# zurg can repair broken links, but it doesn't mean it will appear on the same location (especially if there's only 1 episode missing)
+# e.g. i was missing e06 of Better.Call.Saul.S03.2160p.NF.WEBRip.DD5.1.x264-ViSUM
+# after zurg re-added the file, it appeared on a different directory:
+# Better.Call.Saul.S03E06.2160p.NF.WEBRip.DD5.1.x264-ViSUM.mkv
+enable_repair: false # BEWARE! THERE CAN ONLY BE 1 INSTANCE OF ZURG THAT SHOULD REPAIR YOUR TORRENTS
+
 # List of directory definitions and their filtering rules
 directories:
   # Configuration for TV shows
