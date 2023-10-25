@@ -87,6 +87,8 @@ filters:
     - any_file_inside_regex: /pattern/i
 ```
 
+*Take caution:* `any_file_inside_*` filters might lead to unexpected results. Consider the case where 2 torrents of the same name but different files inside (e.g. `The Simpsons` where one can contain `*s17*` episodes and another `*s19*`. Let's say that one torrent meets the criteria of an `any_file_inside_*` filter, the other torrent doesn't meet it. The torrent will appear on that directory and will contain all files of both torrents - `*s17*` and `*s19*`.
+
 ## Regex
 
 In Zurg, you can use regular expressions (often referred to as "regex") to define patterns for filtering. A regex pattern is wrapped between slashes `/`. For example, `/season[\s\.]?\d/i` is a regex pattern. The main part of this pattern is `season[\s\.]?\d`, which matches strings like "season 1", "season.2", or "season 3". The trailing `i` after the last slash is a flag that makes the pattern case-insensitive. This means "SEASON 1", "SeAsOn 2", and "season 3" would all match this pattern.
