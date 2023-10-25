@@ -7,6 +7,7 @@ Welcome to the Zurg Configuration guide. This document will help you set up and 
 1. [Basic Configuration](#basic-configuration)
 2. [Directory Definitions and Filters](#directory-definitions-and-filters)
 3. [Advanced Filtering](#advanced-filtering)
+4. [Regex](#regex)
 
 ## Basic Configuration
 
@@ -85,5 +86,21 @@ filters:
     - contains_strict: Keyword3
     - any_file_inside_regex: /pattern/i
 ```
+
+## Regex
+
+In Zurg, you can use regular expressions (often referred to as "regex") to define patterns for filtering. A regex pattern is wrapped between slashes `/`. For example, `/season[\s\.]?\d/i` is a regex pattern. The main part of this pattern is `season[\s\.]?\d`, which matches strings like "season 1", "season.2", or "season 3". The trailing `i` after the last slash is a flag that makes the pattern case-insensitive. This means "SEASON 1", "SeAsOn 2", and "season 3" would all match this pattern.
+
+You can append flags after the pattern to change how the pattern behaves:
+
+- `i`: Case-Insensitive. It allows the pattern to match strings regardless of their case. For example, `/abc/i` matches "abc", "ABC", "aBc", etc.
+  
+- `m`: Multiline mode. It allows `^` and `$` to match the start/end of each line in a string and not just the start/end of the entire string.
+  
+- `s`: Dot matches newline. It allows `.` to match newlines. Without this flag, `.` matches any character except a newline.
+  
+- `x`: Extended mode. It allows you to add whitespace and comments within your regex for better readability.
+
+For example, the pattern `/abc/im` would match the string "ABC" (because of the `i` flag) and would allow for matching at the start/end of each line in a multiline string (because of the `m` flag).
 
 ## Happy organizing!
