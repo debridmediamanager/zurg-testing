@@ -1,12 +1,11 @@
 # Zurg configuration version
 zurg: v1
 
-token: YOUR_TOKEN_HERE
+token: YOUR_RD_API_TOKEN # https://real-debrid.com/apitoken
 port: 9999
-concurrent_workers: 10 # the higher the number the faster zurg runs through your library but too high and you will get rate limited
-check_for_changes_every_secs: 15 # zurg polls real-debrid for changes in your library
-info_cache_time_hours: 12 # how long do we want to check if a torrent is still alive or dead? 12 to 24 hours is good enough
-
+concurrent_workers: 10
+check_for_changes_every_secs: 15
+info_cache_time_hours: 12
 # zurg can repair broken links, but it doesn't mean it will appear on the same location (especially if there's only 1 episode missing)
 # e.g. i was missing e06 of Better.Call.Saul.S03.2160p.NF.WEBRip.DD5.1.x264-ViSUM
 # after zurg re-added the file, it appeared on a different directory:
@@ -18,6 +17,7 @@ directories:
   # Configuration for TV shows
   shows:
     group: media # directories on different groups have duplicates of the same torrent
+    group_order: 1
     filters:
       - regex: /season[\s\.]?\d/i          # Capture torrent names with the term 'season' in any case
       - regex: /saison[\s\.]?\d/i          # For non-English namings
@@ -29,7 +29,8 @@ directories:
 
   # Configuration for movies
   movies:
-    group: media # because movies and shows are in the same group, and shows come first before movies, all torrents that doesn't fall into shows will fall into movies
+    group: media # because movies and shows are in the same group,
+    group_order: 2 # and shows has a lower group_order number than movies, all torrents that doesn't fall into shows will fall into movies
     filters:
       - regex: /.*/ # you cannot leave a directory without filters because it will not have any torrents in it
 
