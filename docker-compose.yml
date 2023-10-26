@@ -3,6 +3,7 @@ version: '3.8'
 services:
   zurg:
     image: ghcr.io/debridmediamanager/zurg-testing:latest
+    container_name: zurg
     restart: unless-stopped
     ports:
       - 9999:9999
@@ -12,6 +13,7 @@ services:
 
   rclone:
     image: rclone/rclone:latest
+    container_name: zurg-rclone
     restart: unless-stopped
     environment:
       TZ: Europe/Berlin
@@ -26,6 +28,8 @@ services:
       - apparmor:unconfined
     devices:
       - /dev/fuse:/dev/fuse:rwm
+    depends_on:
+      - zurg
     command: "mount zurg: /data --allow-non-empty --allow-other --uid=1000 --gid=1000 --dir-cache-time 10s --read-only"
 
 volumes:
