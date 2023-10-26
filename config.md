@@ -87,7 +87,24 @@ filters:
     - any_file_inside_regex: /pattern/i
 ```
 
-*Take caution:* `any_file_inside_*` filters might lead to unexpected results. Consider the case where 2 torrents of the same name but different files inside (e.g. `The Simpsons` where one can contain `*s17*` episodes and another `*s19*`. Let's say that one torrent meets the criteria of an `any_file_inside_*` filter, the other torrent doesn't meet it. The torrent will appear on that directory and will contain all files of both torrents - `*s17*` and `*s19*`.
+### Important Considerations
+
+1. **Unexpected Results with `any_file_inside_*` Filters:** Such filters can occasionally lead to unexpected outcomes. For instance, imagine two torrents named `The Simpsons`. One might contain files labeled `*s17*` episodes, while the other has `*s19*`. If one torrent aligns with the criteria of an `any_file_inside_*` filter and the other does not, the directory will display the torrent and incorporate files from both torrents - `*s17*` and `*s19*`.
+
+2. **Interactions of `not_contains` or `not_contains_strict` in `or` Context:** When `not_contains` or `not_contains_strict` are used within an `or` context in combination with `regex`, `contains`, or `contains_strict`, it can lead to unanticipated results. For example:
+
+ ```yaml
+ filters:
+   - or:
+     - not_contains: keyword1
+     - regex: /pattern/i
+     - contains: keyword2
+     - contains_strict: Keyword3
+ ```
+
+In this scenario, a torrent might match if it doesn't contain `keyword1` or if it matches the regex pattern, or if it contains `keyword2`, or if it strictly contains `Keyword3`. This can lead to torrents being included that you might not have anticipated.
+
+It's essential to test your filters thoroughly to ensure they behave as intended and make necessary adjustments.
 
 ## Regex
 
