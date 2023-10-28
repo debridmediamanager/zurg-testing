@@ -2,7 +2,7 @@
 
 A self-hosted Real-Debrid webdav server written from scratch, alternative to rclone_rd. Together with [rclone](https://rclone.org/) it can mount your Real-Debrid torrent library into your filesystem.
 
-## How to run zurg in 5 steps
+## How to run zurg in 5 steps for Plex
 
 1. Clone this repo `git clone https://github.com/debridmediamanager/zurg-testing.git`
 2. Add your token in `config.yml`
@@ -10,7 +10,14 @@ A self-hosted Real-Debrid webdav server written from scratch, alternative to rcl
 4. Run `docker compose up -d`
 5. `time ls -1R /mnt/zurg` You're done!
 
-The server is also exposed to your localhost via port 9999. You can point [Infuse](https://firecore.com/infuse) or any webdav clients to it.
+## How to run zurg in 4 steps for [Infuse](https://firecore.com/infuse) with SFTP
+
+1. Clone this repo `git clone https://github.com/debridmediamanager/zurg-testing.git`
+2. Add your token in `config.yml`
+4. Run `docker compose -f docker-compose.infuse.yml up -d`
+4. `echo "ls" | sftp -P 9998 localhost` You're done!
+
+The webdav server is also exposed to your localhost via port 9999. You can point [Infuse](https://firecore.com/infuse) or any webdav clients to it.
 
 > Note: I have only tested this in Mac and Linux
 
