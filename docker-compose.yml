@@ -15,15 +15,22 @@ services:
     image: rclone/rclone:latest
     container_name: zurg-rclone
     restart: unless-stopped
-    ports:
-      - 9998:2022
     environment:
       TZ: Europe/Berlin
       PUID: 1000
       PGID: 1000
+    volumes:
+      - /mnt/zurg:/data:rshared
+      - ./rclone.conf:/config/rclone/rclone.conf
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    devices:
+      - /dev/fuse:/dev/fuse:rwm
     depends_on:
       - zurg
-    command: "serve sftp --no-auth zurg:"
+    command: "mount zurg: /data --allow-non-empty --allow-other --uid=1000 --gid=1000 --dir-cache-time 10s --read-only"
 
 volumes:
   zurgdata:
