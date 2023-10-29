@@ -11,6 +11,9 @@ info_cache_time_hours: 12
 # after zurg re-added the file, it appeared on a different directory:
 # Better.Call.Saul.S03E06.2160p.NF.WEBRip.DD5.1.x264-ViSUM.mkv
 enable_repair: false # BEWARE! THERE CAN ONLY BE 1 INSTANCE OF ZURG THAT SHOULD REPAIR YOUR TORRENTS
+on_library_update: |
+  echo "You can execute anything here!" # https://github.com/debridmediamanager/zurg-testing/blob/main/config.md#library-update-trigger
+network_buffer_size: 32768
 
 # List of directory definitions and their filtering rules
 directories:
@@ -26,6 +29,8 @@ directories:
       - regex: /\btv/i            # anything that has TV in it is a TV show, right?
       - contains: complete
       - contains: seasons
+      - any_file_inside_regex: /s\d\d/i
+      - any_file_inside_regex: /\d\s?x\s?\d\d/i
 
   # Configuration for movies
   movies:
