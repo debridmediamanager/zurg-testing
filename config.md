@@ -148,8 +148,8 @@ on_library_update: |
   echo "All sections refreshed."
 ```
 
-Ensure you replace the placeholders (`Your X-Plex-Token Here` and `http
+Ensure you replace the placeholders (`Your X-Plex-Token Here` and `http://plex.box`) with the appropriate values for your setup.
 
-://plex.box`) with the appropriate values for your setup.
+This is just an example usage but you can also use it for notifications, etc.
 
 ## Happy organizing!
