@@ -8,6 +8,7 @@ Welcome to the Zurg Configuration guide. This document will help you set up and 
 2. [Directory Definitions and Filters](#directory-definitions-and-filters)
 3. [Advanced Filtering](#advanced-filtering)
 4. [Regex](#regex)
+5. [Library Update Trigger](#library-update-trigger)
 
 ## Basic Configuration
 
@@ -20,6 +21,7 @@ Here are the primary configurations:
 - `check_for_changes_every_secs`: Time interval for checking changes (default is `15` seconds).
 - `info_cache_time_hours`: Cache time for info (default is `12` hours).
 - `enable_repair`: Set to `true` if you want Zurg to repair your torrents. Important: Only ONE instance of Zurg should have this enabled.
+- `network_buffer_size`: You can play around this value and see if there's any performance gain when streaming files. Common values are `16384` for 16KB, `32768` for 32KB (default), so on...
 
 ```yaml
 zurg: v1
@@ -29,6 +31,7 @@ concurrent_workers: 10
 check_for_changes_every_secs: 15
 info_cache_time_hours: 12
 enable_repair: true
+network_buffer_size: 32768
 ```
 
 ## Directory Definitions and Filters
@@ -121,5 +124,32 @@ You can append flags after the pattern to change how the pattern behaves:
 - `x`: Extended mode. It allows you to add whitespace and comments within your regex for better readability.
 
 For example, the pattern `/abc/im` would match the string "ABC" (because of the `i` flag) and would allow for matching at the start/end of each line in a multiline string (because of the `m` flag).
+
+## Library Update Trigger
+
+Using the `on_library_update` directive, you can configure a trigger to refresh your Plex library whenever changes are detected:
+
+```yaml
+on_library_update: |
+  token="Your X-Plex-Token Here"
+  plex_url="http://plex.box"
+
+  # Get the list of library sections from Plex
+  sections_xml=$(curl -s "$plex_url/library/sections" -H "X-Plex-Token: $token")
+
+  # Extract section IDs using grep and awk
+  section_ids=$(echo "$sections_xml" | grep -o 'key="[0-9]*"' | awk -F'"' '{print $2}')
+
+  # Loop through each section ID and refresh the section
+  for id in $section_ids; do
+      curl -s -X POST "$plex_url/library/sections/$id/refresh" -H "X-Plex-Token: $token"
+  done
+
+  echo "All sections refreshed."
+```
+
+Ensure you replace the placeholders (`Your X-Plex-Token Here` and `http
+
+://plex.box`) with the appropriate values for your setup.
 
 ## Happy organizing!
