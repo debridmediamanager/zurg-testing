@@ -3,27 +3,27 @@ version: '3.8'
 services:
   zurg:
     image: ghcr.io/debridmediamanager/zurg-testing:latest
-    container_name: zurg
     restart: unless-stopped
     ports:
-      - 9999:9999
+      - 9997:9999
     volumes:
       - ./config.yml:/app/config.yml
       - zurgdata:/app/data
 
   rclone:
     image: rclone/rclone:latest
-    container_name: zurg-rclone
     restart: unless-stopped
+    volumes:
+      - ./rclone.conf:/config/rclone/rclone.conf
     ports:
-      - 9998:2022
+      - 9998:2222
     environment:
       TZ: Europe/Berlin
       PUID: 1000
       PGID: 1000
     depends_on:
       - zurg
-    command: "serve sftp --no-auth zurg:"
+    command: "serve sftp --no-auth --addr :2222 zurg:"
 
 volumes:
   zurgdata:
