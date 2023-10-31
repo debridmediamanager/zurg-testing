@@ -27,9 +27,16 @@ url = http://zurg:9999/http
 no_head = false
 no_slash = false
 
-[rd]
+[rclone_rd]
 type = realdebrid
-api_key = TOKENHERE
+api_key = YOUR_RD_TOKEN
+
+[rd_webdav]
+type = webdav
+url = https://dav.real-debrid.com/
+vendor = other
+user = YOUR_RD_USERNAME
+pass = YOUR_RD_WEBDAV_PASSWORD
 ```
 
 And then, create this `docker-compose.yml` file.
@@ -47,7 +54,7 @@ services:
       - ./config.yml:/app/config.yml
       - zurgdata:/app/data
 
-  rclone:
+  rclone_zurg:
     image: rclone/rclone:latest
     restart: unless-stopped
     environment:
@@ -55,19 +62,16 @@ services:
       PUID: 1000
       PGID: 1000
     volumes:
-      - /mnt/zurg:/data:rshared
       - ./rclone.conf:/config/rclone/rclone.conf
     cap_add:
       - SYS_ADMIN
     security_opt:
       - apparmor:unconfined
     devices:
-      - /dev/fuse:/dev/fuse:rwm
-    depends_on:
-      - zurg
-    command: "mount zurg: /data --allow-non-empty --allow-other --uid=1000 --gid=1000 --dir-cache-time 10s --read-only"
+      - /dev/fuse
+    command: "mount zurg: /data --umask=002 --allow-other --uid=1000 --gid=1000 --dir-cache-time 10s --read-only"
 
-  rclonerd:
+  rclone_rd:
     image: itstoggle/rclone_rd:latest
     restart: unless-stopped
     environment:
@@ -82,20 +86,40 @@ services:
       - apparmor:unconfined
     devices:
       - /dev/fuse
-    command: "mount rd: /data --umask=002 --allow-other --uid=1000 --gid=1000 --dir-cache-time 10s --read-only"
+    command: "mount rclone_rd: /data --umask=002 --allow-other --uid=1000 --gid=1000 --dir-cache-time 10s --read-only"
+
+  rd_webdav:
+    image: rclone/rclone:latest
+    restart: unless-stopped
+    environment:
+      TZ: Europe/Berlin
+      PUID: 1000
+      PGID: 1000
+    volumes:
+      - ./rclone.conf:/config/rclone/rclone.conf
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    devices:
+      - /dev/fuse
+    command: "mount rd_webdav: /data --umask=002 --allow-other --uid=1000 --gid=1000 --dir-cache-time 10s --read-only"
 
 volumes:
   zurgdata:
 ```
 
-after this we benchmark `rclone` (zurg) and `rclonerd` (rclone_rd)
+after this we benchmark `rclone_zurg` (zurg) and `rclone_rd` (rclone_rd) and `rd_webdav` (Real-Debrid's webdav)
 
 ```
-# benchmark: zurg
-(for i in {1..10}; do time (docker compose exec rclone ls -1R /data | wc -l); done)
+# benchmark: rclone_zurg
+(for i in {1..10}; do time (docker compose exec rclone_zurg ls -1R /data | wc -l); done)
 
 # benchmark: rclone_rd
 (for i in {1..10}; do time (docker compose exec rclonerd ls -1R /data | wc -l); done)
+
+# benchmark: rd_webdav
+(for i in {1..10}; do time (docker compose exec rd_webdav ls -1R /data | wc -l); done)
 ```
 
 And report the results to:
