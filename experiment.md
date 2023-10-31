@@ -24,8 +24,8 @@ as well as your `rclone.conf`
 [zurg]
 type = http
 url = http://zurg:9999/http
-no_head = true
-no_slash = true
+no_head = false
+no_slash = false
 
 [rd]
 type = realdebrid
@@ -42,7 +42,7 @@ services:
     image: ghcr.io/debridmediamanager/zurg-testing:latest
     restart: unless-stopped
     ports:
-      - 9999
+      - 9999:9999
     volumes:
       - ./config.yml:/app/config.yml
       - zurgdata:/app/data
@@ -55,14 +55,17 @@ services:
       PUID: 1000
       PGID: 1000
     volumes:
+      - /mnt/zurg:/data:rshared
       - ./rclone.conf:/config/rclone/rclone.conf
     cap_add:
       - SYS_ADMIN
     security_opt:
       - apparmor:unconfined
     devices:
-      - /dev/fuse
-    command: "mount zurg: /data --umask=002 --allow-other --uid=1000 --gid=1000 --dir-cache-time 10s --read-only"
+      - /dev/fuse:/dev/fuse:rwm
+    depends_on:
+      - zurg
+    command: "mount zurg: /data --allow-non-empty --allow-other --uid=1000 --gid=1000 --dir-cache-time 10s --read-only"
 
   rclonerd:
     image: itstoggle/rclone_rd:latest
