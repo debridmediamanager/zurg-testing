@@ -10,7 +10,7 @@ A self-hosted Real-Debrid webdav server written from scratch, alternative to rcl
 2. Add your token in `config.yml`
 3. `sudo mkdir -p /mnt/zurg`
 4. Run `docker compose up -d`
-5. `time ls -1R /mnt/zurg` You're done!
+5. `time ls -1R /mnt/zurg` You're done! If you do edits on your config.yml just do `docker compose restart zurg`.
 
 A webdav server is also exposed to your localhost via port `9999`.
 
@@ -19,51 +19,13 @@ A webdav server is also exposed to your localhost via port `9999`.
 1. Clone this repo `git clone https://github.com/debridmediamanager/zurg-testing.git`
 2. Add your token in `config.yml`
 4. Run `docker compose -f docker-compose.infuse.yml up -d` to start the containers; `docker compose -f docker-compose.infuse.yml down` to remove
-4. `echo "ls" | sftp -P 9998 localhost` You're done!
+4. `echo "ls" | sftp -P 9998 localhost` You're done! If you do edits on your config.yml just do `docker compose -f docker-compose.infuse.yml restart zurg`.
 
 The SFTP server is exposed via port `9998`, and a webdav server is also exposed to your localhost via port `9997`. You can point [Infuse](https://firecore.com/infuse) or any webdav clients to it.
 
+You can rename `docker-compose.infuse.yml` to `docker-compose.yml` so you can drop `-f docker-compose.infuse.yml` on every docker compose command you run.
+
 > Note: I have only tested this in Mac and Linux
-
-## make commands
-
-This repository provides a `Makefile` for managing the Docker Compose setups for Plex and Infuse SFTP. Below is a description of each available command.
-
-### Start Plex Mount
-
-```bash
-make start-plex-mount-example
-```
-
-Upon successful start, it will display:
-
-```
-Plex Mount started: WebDAV and HTTP running at localhost:9999
-```
-
-### Stop Plex Mount
-
-```bash
-make stop-plex-mount-example
-```
-
-### Start Infuse SFTP
-
-```bash
-make start-infuse-sftp-example
-```
-
-Upon successful start, it will display:
-
-```
-Infuse SFTP started: WebDAV and HTTP running at localhost:9997, SFTP at localhost:9998
-```
-
-### Stop Infuse SFTP
-
-```bash
-make stop-infuse-sftp-example
-```
 
 ## Why zurg? Why not X?
 
