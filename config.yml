@@ -6,10 +6,6 @@ port: 9999
 concurrent_workers: 10
 check_for_changes_every_secs: 15
 info_cache_time_hours: 12
-# zurg can repair broken links, but it doesn't mean it will appear on the same location (especially if there's only 1 episode missing)
-# e.g. i was missing e06 of Better.Call.Saul.S03.2160p.NF.WEBRip.DD5.1.x264-ViSUM
-# after zurg re-added the file, it appeared on a different directory:
-# Better.Call.Saul.S03E06.2160p.NF.WEBRip.DD5.1.x264-ViSUM.mkv
 enable_repair: false # BEWARE! THERE CAN ONLY BE 1 INSTANCE OF ZURG THAT SHOULD REPAIR YOUR TORRENTS
 on_library_update: |
   echo "You can execute anything here!" # https://github.com/debridmediamanager/zurg-testing/blob/main/config.md#library-update-trigger
