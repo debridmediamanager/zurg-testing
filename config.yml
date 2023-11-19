@@ -2,14 +2,24 @@
 zurg: v1
 
 token: YOUR_RD_API_TOKEN # https://real-debrid.com/apitoken
-port: 9999
-concurrent_workers: 10
-check_for_changes_every_secs: 15
-info_cache_time_hours: 12
-enable_repair: false # BEWARE! THERE CAN ONLY BE 1 INSTANCE OF ZURG THAT SHOULD REPAIR YOUR TORRENTS
-on_library_update: |
-  echo "You can execute anything here!" # https://github.com/debridmediamanager/zurg-testing/blob/main/config.md#library-update-trigger
-network_buffer_size: 32768
+
+host: "[::]" # do not change this if you are running it inside a docker container
+port: 9999 # do not change this if you are running it inside a docker container
+concurrent_workers: 40
+check_for_changes_every_secs: 15 # check for new or deleted torrents
+info_cache_time_hours: 12 # how long do we need to check for expired links?
+
+enable_repair: true # BEWARE! THERE CAN ONLY BE 1 INSTANCE OF ZURG THAT SHOULD REPAIR YOUR TORRENTS
+retain_folder_name_extension: false # if true, the folder name will contain the file extension when it is a torrent for a single file
+on_library_update: | # use this to update your Plex library for example
+  echo "hook"
+
+network_buffer_size: 1048576 # 1 MiB
+preferred_hosts: # Optional, run the script here https://github.com/debridmediamanager/real-debrid-network-test
+  - 20.download.real-debrid.com
+  - 21.download.real-debrid.com
+  - 22.download.real-debrid.com
+  - 23.download.real-debrid.com
 
 # List of directory definitions and their filtering rules
 directories:
@@ -26,7 +36,9 @@ directories:
       - contains: complete
       - contains: seasons
       - any_file_inside_regex: /s\d\d/i
-      - any_file_inside_regex: /\d\s?x\s?\d\d/i
+      - any_file_inside_regex: /\-\s\d\d\s\-/i
+      - any_file_inside_regex: /episode.?\d{1,4}/i
+      - any_file_inside_regex: /ep.?.?\d{1,4}/i
 
   # Configuration for movies
   movies:
@@ -34,8 +46,3 @@ directories:
     group_order: 2 # and shows has a lower group_order number than movies, all torrents that doesn't fall into shows will fall into movies
     filters:
       - regex: /.*/ # you cannot leave a directory without filters because it will not have any torrents in it
-
-  "ALL MY STUFFS":
-    group: all           # notice the group now is "all", which means it will have all the torrents of shows+movies combined because this directory is alone in this group
-    filters:
-      - regex: /.*/
