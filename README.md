@@ -20,9 +20,3 @@ A webdav server is also exposed to your localhost via port `9999`.
 - If you've ever experienced Plex scanner being stuck on a file and thereby freezing Plex completely, it should not happen anymore because zurg does a comprehensive check if a torrent is dead or not
 
 ## Please read our [wiki](https://github.com/debridmediamanager/zurg-testing/wiki) for more information!
-
-### zurg http+webdav (non-fuse) is in maintenance mode, I will only fix bugs at this point
-
-### zurg fuse is coming soon and won't need rclone to mount and will allow you to delete torrents
-
-If you're interested on testing fuse and have some docker know-how, [check the instructions here](https://gist.github.com/yowmamasita/6361ddf4c07a299062a7bbada8f0e0f3)
