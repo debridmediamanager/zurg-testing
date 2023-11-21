@@ -1,4 +1,4 @@
-# zurg-testing
+# zurg
 
 A self-hosted Real-Debrid webdav server written from scratch, alternative to rclone_rd. Together with [rclone](https://rclone.org/) it can mount your Real-Debrid torrent library into your filesystem.
 
