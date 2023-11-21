@@ -15,16 +15,16 @@ on_library_update: |
   echo "hook"
 
 network_buffer_size: 1048576 # 1 MiB
-preferred_hosts: # Run the script here https://github.com/debridmediamanager/real-debrid-network-test
-  - 20.download.real-debrid.com
-  - 21.download.real-debrid.com
-  - 22.download.real-debrid.com
-  - 23.download.real-debrid.com
-  - 30.download.real-debrid.com
-  - 31.download.real-debrid.com
-  - 32.download.real-debrid.com
-  - 34.download.real-debrid.com
-  - 40.download.real-debrid.com
+# preferred_hosts: # Run the script here https://github.com/debridmediamanager/real-debrid-network-test
+#   - 20.download.real-debrid.com
+#   - 21.download.real-debrid.com
+#   - 22.download.real-debrid.com
+#   - 23.download.real-debrid.com
+#   - 30.download.real-debrid.com
+#   - 31.download.real-debrid.com
+#   - 32.download.real-debrid.com
+#   - 34.download.real-debrid.com
+#   - 40.download.real-debrid.com
 # curl https://raw.githubusercontent.com/debridmediamanager/real-debrid-network-test/main/real-debrid-network-test.sh | bash
 
 # List of directory definitions and their filtering rules
