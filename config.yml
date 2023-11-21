@@ -5,44 +5,48 @@ token: YOUR_RD_API_TOKEN # https://real-debrid.com/apitoken
 
 host: "[::]" # do not change this if you are running it inside a docker container
 port: 9999 # do not change this if you are running it inside a docker container
-concurrent_workers: 40
-check_for_changes_every_secs: 15 # check for new or deleted torrents
-info_cache_time_hours: 12 # how long do we need to check for expired links?
+concurrent_workers: 200
+check_for_changes_every_secs: 15
+info_cache_time_hours: 12
 
 enable_repair: true # BEWARE! THERE CAN ONLY BE 1 INSTANCE OF ZURG THAT SHOULD REPAIR YOUR TORRENTS
-retain_folder_name_extension: false # if true, the folder name will contain the file extension when it is a torrent for a single file
-on_library_update: | # use this to update your Plex library for example
+retain_folder_name_extension: false # if true, zurg won't modify the filenames from real-debrid
+on_library_update: |
   echo "hook"
 
 network_buffer_size: 1048576 # 1 MiB
-preferred_hosts: # Optional, run the script here https://github.com/debridmediamanager/real-debrid-network-test
+preferred_hosts: # Run the script here https://github.com/debridmediamanager/real-debrid-network-test
   - 20.download.real-debrid.com
   - 21.download.real-debrid.com
   - 22.download.real-debrid.com
   - 23.download.real-debrid.com
+  - 30.download.real-debrid.com
+  - 31.download.real-debrid.com
+  - 32.download.real-debrid.com
+  - 34.download.real-debrid.com
+  - 40.download.real-debrid.com
+# curl https://raw.githubusercontent.com/debridmediamanager/real-debrid-network-test/main/real-debrid-network-test.sh | bash
 
 # List of directory definitions and their filtering rules
 directories:
-  # Configuration for TV shows
-  shows:
+  # Configuration for anime shows
+  anime:
     group: media # directories on different groups have duplicates of the same torrent
-    group_order: 1
+    group_order: 10 # group order = priority, it defines who eats first on a group
     filters:
-      - regex: /season[\s\.]?\d/i          # Capture torrent names with the term 'season' in any case
-      - regex: /saison[\s\.]?\d/i          # For non-English namings
-      - regex: /stagione[\s\.]?\d/i        # if there's french, there should be italian too
-      - regex: /s\d\d/i           # Capture common season notations like S01, S02, etc.
-      - regex: /\btv/i            # anything that has TV in it is a TV show, right?
-      - contains: complete
-      - contains: seasons
-      - any_file_inside_regex: /s\d\d/i
-      - any_file_inside_regex: /\-\s\d\d\s\-/i
-      - any_file_inside_regex: /episode.?\d{1,4}/i
-      - any_file_inside_regex: /ep.?.?\d{1,4}/i
+      - and: # you can use nested 'and' & 'or' conditions
+        - has_episodes: true # intelligent detection of episode files inside a torrent
+        - any_file_inside_regex: /^\[/ # usually anime starts with [ e.g. [SubsPlease]
+        - any_file_inside_not_regex: /s\d\de\d\d/i # and usually anime doesn't use SxxExx
 
-  # Configuration for movies
+  shows:
+    group: media
+    group_order: 20
+    filters:
+      - has_episodes: true  # intelligent detection of episode files inside a torrent
+
   movies:
-    group: media # because movies and shows are in the same group,
-    group_order: 2 # and shows has a lower group_order number than movies, all torrents that doesn't fall into shows will fall into movies
+    group: media  # because anime, shows and movies are in the same group,
+    group_order: 30 # and anime and shows has a lower group_order number than movies, all torrents that doesn't fall into the previous 2 will fall into movies
     filters:
       - regex: /.*/ # you cannot leave a directory without filters because it will not have any torrents in it
