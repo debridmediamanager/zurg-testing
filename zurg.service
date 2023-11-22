@@ -1,0 +1,12 @@
+[Unit]
+Description=zurg
+After=network.target
+
+[Service]
+Type=simple
+User=<your_username>
+ExecStart=/home/<your_username>/zurg/zurg
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
