@@ -1,12 +1,17 @@
 [Unit]
 Description=zurg
-After=network.target
+After=network-online.target
 
 [Service]
 Type=simple
-User=<your_username>
-ExecStart=/home/<your_username>/zurg/zurg
-Restart=on-failure
+ExecStart=/home/yowmamasita/zurg-linux-amd64
+WorkingDirectory=/home/yowmamasita
+StandardOutput=file:/var/log/zurg.log
+StandardError=file:/var/log/zurg.log
+Restart=on-abort
+RestartSec=1
+StartLimitInterval=600s
+StartLimitBurst=5
 
 [Install]
 WantedBy=multi-user.target
