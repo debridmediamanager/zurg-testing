@@ -18,8 +18,8 @@ on_library_update: |
   done
 
 network_buffer_size: 1048576 # 1 MiB
-serve_from_rclone: false
-force_ipv6: true
+serve_from_rclone: false # you have the option to download a file's data in rclone instead of zurg
+force_ipv6: false
 # preferred_hosts: # Run the script here https://github.com/debridmediamanager/real-debrid-network-test
 #   - 20.download.real-debrid.com
 #   - 21.download.real-debrid.com
