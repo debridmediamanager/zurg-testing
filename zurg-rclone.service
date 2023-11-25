@@ -1,29 +1,22 @@
 [Unit]
-Description=rclone
+Description=Rclone mount for zurg
 After=network-online.target
 
 [Service]
 Type=notify
-ExecStart=rclone mount \
-  --config=$HOME/zurg-testing/rclone.conf \
+ExecStart=/home/yowmamasita/go/bin/rclone mount \
+  --config=/home/yowmamasita/.config/rclone/rclone.conf \
   --log-level=INFO \
-  --log-file=$HOME/zurg-testing/rclone-mount.log \
-  --umask=002 \
+  --log-file=/opt/rclone/logs/zurg.log \
   --gid=1000 \
   --uid=1000 \
   --allow-other \
-  --allow-empty \
-  --timeout=1h \
-  --poll-interval=15s \
-  --dir-cache-time=10s \
-  --cache-dir=/opt/rclone/cache/rd \
-  --vfs-cache-mode=full \
-  --vfs-cache-max-size=250G \
-  --vfs-cache-max-age=24h \
+  --cache-dir=/opt/rclone/cache/zurg \
+  --dir-cache-time=20s \
   zurg: /mnt/zurg
-ExecStop=/bin/fusermount -uz /mnt/zurg
+ExecStop=/bin/bash -c '/bin/fusermount -uz /mnt/zurg; umount /mnt/zurg'
 Restart=on-abort
-RestartSec=5
+RestartSec=1
 StartLimitInterval=60s
 StartLimitBurst=3
 
