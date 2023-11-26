@@ -25,7 +25,7 @@ services:
       PGID: 1000
     depends_on:
       - zurg
-    command: "serve sftp --no-auth --addr :2222 zurg:"
+    command: "serve sftp --no-auth --addr :2222 zurg: --retries 0 --low-level-retries 0"
 
 volumes:
   zurgdata:
