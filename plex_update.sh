@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# if you are missing xmllint
+# sudo apt install libxml2-utils
+
 plex_url="http://yourplexip:32400"
 token="yourplextoken"
 zurg_mount="/mnt/zurg" # replace with your zurg mount
