@@ -33,3 +33,5 @@ do
 done
 
 echo "All updated sections refreshed"
+
+# credits to godver3
