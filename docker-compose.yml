@@ -28,7 +28,7 @@ services:
       - /dev/fuse:/dev/fuse:rwm
     depends_on:
       - zurg
-    command: "mount zurg: /data --allow-non-empty --allow-other --uid=1000 --gid=1000 --dir-cache-time 10s"
+    command: "mount zurg: /data --allow-non-empty --allow-other --uid=1000 --gid=1000 --dir-cache-time 10s --retries 0 --low-level-retries 0"
 
 volumes:
   zurgdata:
