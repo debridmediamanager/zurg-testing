@@ -2,6 +2,8 @@
 zurg: v1
 token: YOUR_RD_API_TOKEN # https://real-debrid.com/apitoken
 
+# when somebody asks for your zurg config, you copy from this point
+
 # basic functionality
 host: "[::]" # do not change this if you are running it inside a docker container
 port: 9999 # do not change this if you are running it inside a docker container
