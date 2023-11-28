@@ -1,13 +1,19 @@
 # Zurg configuration version
 zurg: v1
-
 token: YOUR_RD_API_TOKEN # https://real-debrid.com/apitoken
 
+# basic functionality
 host: "[::]" # do not change this if you are running it inside a docker container
 port: 9999 # do not change this if you are running it inside a docker container
 concurrent_workers: 200
 check_for_changes_every_secs: 15
-
+# reliability configs
+unrestrict_workers: 10 # since unrestricting has a different rate limit, use a different worker pool. decrease this if you are getting 429s
+release_unrestrict_after_ms: 100 # wait time for every unrestrict worker to be released. increase this if you are getting 429s
+rate_limit_sleep_secs: 6 # wait time after getting a 429 from Real-Debrid API
+realdebrid_timeout_secs: 60 # api timeout
+retries_until_failed: 5 # api failures until considered failed
+# misc configs
 enable_repair: true # BEWARE! THERE CAN ONLY BE 1 INSTANCE OF ZURG THAT SHOULD REPAIR YOUR TORRENTS
 retain_folder_name_extension: false # if true, zurg won't modify the filenames from real-debrid
 retain_rd_torrent_name: false # if true, it will strictly follow RD API returned torrent name which should make this more compatible with rdt-client
@@ -16,10 +22,10 @@ on_library_update: |
   do
       echo "detected update on: $arg"
   done
-
+# network configs
 network_buffer_size: 1048576 # 1 MiB
-serve_from_rclone: false # you have the option to download a file's data in rclone instead of zurg
-force_ipv6: false
+serve_from_rclone: false
+force_ipv6: true
 # preferred_hosts: # Run the script here https://github.com/debridmediamanager/real-debrid-network-test
 #   - 20.download.real-debrid.com
 #   - 21.download.real-debrid.com
