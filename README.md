@@ -2,6 +2,16 @@
 
 A self-hosted Real-Debrid webdav server written from scratch. Together with [rclone](https://rclone.org/) it can mount your Real-Debrid torrent library into your filesystem just like Dropbox.
 
+## Download
+
+### Latest version: v0.9.2-hotfix.2
+
+[Download the binary](https://github.com/debridmediamanager/zurg-testing/tree/main/releases/v0.9.2-hotfix.2) or use docker
+
+```sh
+docker pull ghcr.io/debridmediamanager/zurg-testing:v0.9.2-hotfix.2
+```
+
 ## How to run zurg in 5 steps for Plex
 
 1. Clone this repo `git clone https://github.com/debridmediamanager/zurg-testing.git`
