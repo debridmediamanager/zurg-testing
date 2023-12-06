@@ -31,4 +31,4 @@ A webdav server is also exposed to your localhost via port `9999`.
 
 ## Please read our [wiki](https://github.com/debridmediamanager/zurg-testing/wiki) for more information!
 
-## [zurg's version history](https://github.com/debridmediamanager/zurg-testing/wiki/History)https://github.com/debridmediamanager/zurg-testing/wiki/History
+## [zurg's version history](https://github.com/debridmediamanager/zurg-testing/wiki/History)
