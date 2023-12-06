@@ -30,3 +30,5 @@ A webdav server is also exposed to your localhost via port `9999`.
 - If you've ever experienced Plex scanner being stuck on a file and thereby freezing Plex completely, it should not happen anymore because zurg does a comprehensive check if a torrent is dead or not. You can run `ps aux --sort=-time | grep "Plex Media Scanner"` to check for stuck scanner processes.
 
 ## Please read our [wiki](https://github.com/debridmediamanager/zurg-testing/wiki) for more information!
+
+## [zurg's version history](https://github.com/debridmediamanager/zurg-testing/wiki/History)https://github.com/debridmediamanager/zurg-testing/wiki/History
