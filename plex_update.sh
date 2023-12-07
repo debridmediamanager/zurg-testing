@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# if you are missing xmllint
-# sudo apt install libxml2-utils
+# this uses python3
+# docker compose exec zurg apk add python3
+# sudo apt install python3
 
-plex_url="http://yourplexip:32400"
+plex_url="http://yourplexip:32400" # If you're using zurg inside a Docker container, by default it is 172.17.0.1:32400
 token="yourplextoken"
 zurg_mount="/mnt/zurg" # replace with your zurg mount
 
