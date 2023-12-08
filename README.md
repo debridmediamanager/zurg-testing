@@ -31,6 +31,11 @@ A webdav server is also exposed to your localhost via port `9999`.
 - You can configure a flexible directory structure in `config.yml`; you can select individual torrents that should appear on a directory by the ID you see in [DMM](https://debridmediamanager.com/).
 - If you've ever experienced Plex scanner being stuck on a file and thereby freezing Plex completely, it should not happen anymore because zurg does a comprehensive check if a torrent is dead or not. You can run `ps aux --sort=-time | grep "Plex Media Scanner"` to check for stuck scanner processes.
 
+## Guides
+
+- @I-am-PUID-0's [pd_zurg](https://github.com/I-am-PUID-0/pd_zurg)
+- @Pukabyte's [Guide: Zurg + RDT + Prowlarr + Arrs + Petio + Autoscan + Plex + Scannarr](https://puksthepirate.notion.site/Guide-Zurg-RDT-Prowlarr-Arrs-Petio-Autoscan-Plex-Scannarr-eebe27d130fa400c8a0536cab9d46eb3)
+
 ## Please read our [wiki](https://github.com/debridmediamanager/zurg-testing/wiki) for more information!
 
 ## [zurg's version history](https://github.com/debridmediamanager/zurg-testing/wiki/History)
