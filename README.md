@@ -33,8 +33,8 @@ A webdav server is also exposed to your localhost via port `9999`.
 
 ## Guides
 
-- https://github.com/I-am-PUID-0 [pd_zurg](https://github.com/I-am-PUID-0/pd_zurg)
-- https://github.com/Pukabyte [Guide: Zurg + RDT + Prowlarr + Arrs + Petio + Autoscan + Plex + Scannarr](https://puksthepirate.notion.site/Guide-Zurg-RDT-Prowlarr-Arrs-Petio-Autoscan-Plex-Scannarr-eebe27d130fa400c8a0536cab9d46eb3)
+- [@I-am-PUID-0](https://github.com/I-am-PUID-0)'s [pd_zurg](https://github.com/I-am-PUID-0/pd_zurg)
+- [@Pukabyte](https://github.com/Pukabyte)'s [Guide: Zurg + RDT + Prowlarr + Arrs + Petio + Autoscan + Plex + Scannarr](https://puksthepirate.notion.site/Guide-Zurg-RDT-Prowlarr-Arrs-Petio-Autoscan-Plex-Scannarr-eebe27d130fa400c8a0536cab9d46eb3)
 
 ## Please read our [wiki](https://github.com/debridmediamanager/zurg-testing/wiki) for more information!
 
