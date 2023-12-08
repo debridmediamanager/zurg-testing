@@ -11,7 +11,6 @@ concurrent_workers: 200
 check_for_changes_every_secs: 15
 # reliability configs
 unrestrict_workers: 10 # since unrestricting has a different rate limit, use a different worker pool. decrease this if you are getting 429s
-release_unrestrict_after_ms: 100 # wait time for every unrestrict worker to be released. increase this if you are getting 429s
 rate_limit_sleep_secs: 6 # wait time after getting a 429 from Real-Debrid API
 realdebrid_timeout_secs: 60 # api timeout
 retries_until_failed: 5 # api failures until considered failed
@@ -19,6 +18,7 @@ retries_until_failed: 5 # api failures until considered failed
 enable_repair: true # BEWARE! THERE CAN ONLY BE 1 INSTANCE OF ZURG THAT SHOULD REPAIR YOUR TORRENTS
 retain_folder_name_extension: false # if true, zurg won't modify the filenames from real-debrid
 retain_rd_torrent_name: false # if true, it will strictly follow RD API returned torrent name which should make this more compatible with rdt-client
+# on_library_update: sh plex_update.sh "$@"
 on_library_update: |
   for arg in "$@"
   do
@@ -49,7 +49,6 @@ directories:
     filters:
       - and: # you can use nested 'and' & 'or' conditions
         - has_episodes: true # intelligent detection of episode files inside a torrent
-        - any_file_inside_regex: /^\[/ # usually anime starts with [ e.g. [SubsPlease]
         - any_file_inside_not_regex: /s\d\de\d\d/i # and usually anime doesn't use SxxExx
 
   shows:
