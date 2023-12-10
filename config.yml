@@ -2,33 +2,34 @@
 zurg: v1
 token: YOUR_RD_API_TOKEN # https://real-debrid.com/apitoken
 
-# when somebody asks for your zurg config, you copy from this point
-
 # basic functionality
 host: "[::]" # do not change this if you are running it inside a docker container
 port: 9999 # do not change this if you are running it inside a docker container
-concurrent_workers: 200
+concurrent_workers: 20
 check_for_changes_every_secs: 15
-# reliability configs
-unrestrict_workers: 10 # since unrestricting has a different rate limit, use a different worker pool. decrease this if you are getting 429s
-rate_limit_sleep_secs: 6 # wait time after getting a 429 from Real-Debrid API
-realdebrid_timeout_secs: 60 # api timeout
-retries_until_failed: 5 # api failures until considered failed
+
 # misc configs
-enable_repair: true # BEWARE! THERE CAN ONLY BE 1 INSTANCE OF ZURG THAT SHOULD REPAIR YOUR TORRENTS
 retain_folder_name_extension: false # if true, zurg won't modify the filenames from real-debrid
-retain_rd_torrent_name: false # if true, it will strictly follow RD API returned torrent name which should make this more compatible with rdt-client
+retain_rd_torrent_name: false # if true, it will strictly follow RD API torrent name property w/c should make this more compatible with rdt-client
+auto_delete_rar_torrents: false # if true, zurg will delete unstreamable rar files (these torrents will always be compressed in a rar archive no matter what files you select)
+use_download_cache: true # if true, during zurg initialization, it will fetch all downloads to unrestrict links faster
+enable_repair: true # BEWARE! THERE CAN ONLY BE 1 INSTANCE OF ZURG THAT SHOULD REPAIR YOUR TORRENTS
 # on_library_update: sh plex_update.sh "$@"
 on_library_update: |
   for arg in "$@"
   do
       echo "detected update on: $arg"
   done
+
 # network configs
 network_buffer_size: 1048576 # 1 MiB
-serve_from_rclone: false
-force_ipv6: false
-# preferred_hosts: # Run the script here https://github.com/debridmediamanager/real-debrid-network-test
+serve_from_rclone: false # serve file data from rclone, not from zurg (zurg will only provide rclone the link to download)
+verify_download_link: true # if true, zurg will check if the link is truly streamable; only relevant if serve_from_rclone is set to true (as it already does this all the time if serve_from_rclone is false)
+force_ipv6: false # force connect to real-debrid ipv6 addresses
+rate_limit_sleep_secs: 6 # wait time after getting a 429 from Real-Debrid API
+realdebrid_timeout_secs: 60 # api timeout
+retries_until_failed: 5 # api failures until considered failed
+# preferred_hosts: # Run ./zurg network-test
 #   - 20.download.real-debrid.com
 #   - 21.download.real-debrid.com
 #   - 22.download.real-debrid.com
@@ -38,7 +39,6 @@ force_ipv6: false
 #   - 32.download.real-debrid.com
 #   - 34.download.real-debrid.com
 #   - 40.download.real-debrid.com
-# curl https://raw.githubusercontent.com/debridmediamanager/real-debrid-network-test/main/real-debrid-network-test.sh | bash
 
 # List of directory definitions and their filtering rules
 directories:
@@ -49,6 +49,7 @@ directories:
     filters:
       - and: # you can use nested 'and' & 'or' conditions
         - has_episodes: true # intelligent detection of episode files inside a torrent
+        - any_file_inside_regex: /^\[/ # usually anime starts with [ e.g. [SubsPlease]
         - any_file_inside_not_regex: /s\d\de\d\d/i # and usually anime doesn't use SxxExx
 
   shows:
