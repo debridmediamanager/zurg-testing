@@ -14,14 +14,6 @@ docker pull ghcr.io/debridmediamanager/zurg-testing:latest
 docker pull ghcr.io/debridmediamanager/zurg-testing:v0.9.2-hotfix.4
 ```
 
-#### Raspberry Pi 32-bit arm/v7 build
-
-https://github.com/debridmediamanager/zurg-testing/tree/main/releases/v0.9.2-hotfix.4-32bit
-
-```sh
-docker pull ghcr.io/debridmediamanager/zurg-testing:v0.9.2-hotfix.4-32bit
-```
-
 ## How to run zurg in 5 steps for Plex
 
 1. Clone this repo `git clone https://github.com/debridmediamanager/zurg-testing.git`
