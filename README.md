@@ -24,6 +24,8 @@ docker pull ghcr.io/debridmediamanager/zurg-testing:v0.9.2-hotfix.4
 
 A webdav server is also exposed to your localhost via port `9999`.
 
+### Note: when using zurg in a server outside of your home network, ensure that "Use my Remote Traffic automatically when needed" is unchecked on your [Account page](https://real-debrid.com/account)
+
 ## Why zurg? Why not X?
 
 - Better performance than anything out there; changes in your library appear instantly ([assuming Plex picks it up fast enough](./plex_update.sh))
