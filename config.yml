@@ -2,18 +2,49 @@
 zurg: v1
 token: YOUR_RD_API_TOKEN # https://real-debrid.com/apitoken
 
-# basic functionality
-host: "[::]" # do not change this if you are running it inside a docker container
-port: 9999 # do not change this if you are running it inside a docker container
+# do not change this if you are running it inside a docker container
+host: "[::]"
+port: 9999
+
+# you can protect your zurg server with username+password auth
+# username: yowmamasita
+# password: 1234
+
+# You can proxy all zurg requests like this:
+# proxy: "http://[username:password@]host:port"
+# proxy: "https://[username:password@]host:port"
+# proxy: "socks5://[username:password@]host:port"
+
+# How many requests in parallel should we send to Real-Debrid API?
 concurrent_workers: 20
+
+# How often should we check Real-Debrid API for file changes?
 check_for_changes_every_secs: 15
 
-# misc configs
-retain_folder_name_extension: false # if true, zurg won't modify the filenames from real-debrid
-retain_rd_torrent_name: false # if true, it will strictly follow RD API torrent name property w/c should make this more compatible with rdt-client
-auto_delete_rar_torrents: false # if true, zurg will delete unstreamable rar files (these torrents will always be compressed in a rar archive no matter what files you select)
-use_download_cache: true # if true, during zurg initialization, it will fetch all downloads to unrestrict links faster
-enable_repair: true # BEWARE! THERE CAN ONLY BE 1 INSTANCE OF ZURG THAT SHOULD REPAIR YOUR TORRENTS
+# if true, saved rename info (if it exists) will be ignored
+ignore_renames: false
+
+# if true, it will strictly follow Real-Debrid API filename property
+# setting to true should make zurg more compatible with rdt-client
+retain_rd_torrent_name: false
+
+# note: this is for cosmetic purposes only
+# if true, zurg won't drop file extensions from directories
+retain_folder_name_extension: false
+
+# if true, zurg will delete Real-Debrid rar'ed torrents
+# they are always compressed in a rar archive no matter what files you select
+auto_delete_rar_torrents: false
+
+# if true, during zurg initialization, it will fetch all downloads to unrestrict links faster
+# it will also mount your download links in a special directory
+use_download_cache: true
+
+# BEWARE! THERE CAN ONLY BE 1 INSTANCE OF ZURG THAT SHOULD REPAIR YOUR TORRENTS
+enable_repair: true
+
+# this is useful for ensuring Plex adds your new content immediately
+# uncomment the next line for triggering a partial scan
 # on_library_update: sh plex_update.sh "$@"
 on_library_update: |
   for arg in "$@"
@@ -21,15 +52,34 @@ on_library_update: |
       echo "detected update on: $arg"
   done
 
-# network configs
+# buffer size when zurg is streaming files
 network_buffer_size: 1048576 # 1 MiB
-serve_from_rclone: false # serve file data from rclone, not from zurg (zurg will only provide rclone the link to download)
-verify_download_link: true # if true, zurg will check if the link is truly streamable; only relevant if serve_from_rclone is set to true (as it already does this all the time if serve_from_rclone is false)
-force_ipv6: false # force connect to real-debrid ipv6 addresses
-rate_limit_sleep_secs: 6 # wait time after getting a 429 from Real-Debrid API
-realdebrid_timeout_secs: 60 # api timeout
-retries_until_failed: 5 # api failures until considered failed
-# preferred_hosts: # Run ./zurg network-test
+
+# true = send link to rclone and rclone will stream the file
+# false = zurg will stream the file
+serve_from_rclone: false
+
+# true = zurg will check if the link is really working
+# only relevant if serve_from_rclone is set to true
+# as it already does this all the time if serve_from_rclone is false
+verify_download_link: true
+
+# force connect to real-debrid ipv6 addresses
+# useful if you are blocked
+force_ipv6: false
+
+# sleep time after getting a 429 from Real-Debrid API
+rate_limit_sleep_secs: 6
+
+# time to wait before timing out
+realdebrid_timeout_secs: 60
+
+# api response failures until considered failed
+retries_until_failed: 5
+
+# use the fastest hosts from your location
+# Run ./zurg network-test
+# preferred_hosts:
 #   - 20.download.real-debrid.com
 #   - 21.download.real-debrid.com
 #   - 22.download.real-debrid.com
