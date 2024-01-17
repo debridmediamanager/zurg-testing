@@ -46,6 +46,8 @@ enable_repair: true
 # this is useful for ensuring Plex adds your new content immediately
 # uncomment the next line for triggering a partial scan
 # on_library_update: sh plex_update.sh "$@"
+# if on Windows...
+# on_library_update: & { & '.\plex_update.ps1' $args }
 on_library_update: |
   for arg in "$@"
   do
