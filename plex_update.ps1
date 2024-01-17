@@ -1,6 +1,6 @@
 # PLEX PARTIAL SCAN script or PLEX UPDATE script
 # When zurg detects changes, it can trigger this script IF your config.yml contains
-# on_library_update: powershell.exe -File plex_update.ps1 "$args"
+# on_library_update: & { & '.\plex_update.ps1' $args }
 
 # this uses python3
 # docker compose exec zurg apk add python3
