@@ -16,16 +16,22 @@ $section_ids = (Invoke-WebRequest -Uri "$plex_url/library/sections" -Headers @{"
     ForEach-Object { $_.Node.Value }
 
 foreach ($arg in $args) {
+    # Construct the full path
     $modified_arg = "$zurg_mount/$arg"
     Write-Host "Detected update on: $arg"
     Write-Host "Absolute path: $modified_arg"
 
+    # URL Encode the path
     $encoded_arg = [System.Web.HttpUtility]::UrlEncode($modified_arg)
 
     if ([string]::IsNullOrEmpty($encoded_arg)) {
         Write-Host "Error: Encoded argument is empty. Check the input or encoding process."
         continue
     }
+
+    # Additional escaping logic here if necessary
+    # For instance, if certain characters are not being correctly escaped by UrlEncode,
+    # you can add custom replace commands here.
 
     foreach ($section_id in $section_ids) {
         $final_url = "${plex_url}/library/sections/${section_id}/refresh?path=${encoded_arg}&X-Plex-Token=${token}"
