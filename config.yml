@@ -47,7 +47,7 @@ enable_repair: true
 # uncomment the next line for triggering a partial scan
 # on_library_update: sh plex_update.sh "$@"
 # if on Windows uncomment the line below but comment out the one after it
-# on_library_update: & { & '.\plex_update.ps1' $args }
+# on_library_update: '& .\plex_update.ps1 $args'
 on_library_update: |
   for arg in "$@"
   do
