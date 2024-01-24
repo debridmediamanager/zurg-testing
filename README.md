@@ -61,6 +61,11 @@ Use "zurg [command] --help" for more information about a command.
 - [@Pukabyte](https://github.com/Pukabyte) - [Guide: Zurg + RDT + Prowlarr + Arrs + Petio + Autoscan + Plex + Scannarr](https://puksthepirate.notion.site/Guide-Zurg-RDT-Prowlarr-Arrs-Petio-Autoscan-Plex-Scannarr-eebe27d130fa400c8a0536cab9d46eb3)
 - [u/pg988](https://www.reddit.com/user/pg988/) - [Windows + zurg + Plex guide](https://www.reddit.com/r/RealDebrid/comments/18so926/windows_zurg_plex_guide/)
 - [@ignamiranda](https://github.com/ignamiranda) - [Plex Debrid Zurg Windows Guide](https://github.com/ignamiranda/plex_debrid_zurg_scripts/)
+- [@funkypenguin](https://github.com/funkypenguin) - ["Infinite streaming" from Real Debrid with Plex](https://elfhosted.com/guides/media/stream-from-real-debrid-with-plex/) (ElfHosted)
+
+## Service Providers
+
+- [ElfHosted](https://elfhosted.com) - Easy, [open source](https://elfhosted.com/open/), Kubernetes / GitOps driven hosting of popular self-hosted apps - tested, tightly integrated, and secured. Apps start at $0.05/day, and new accounts get $10 credit, no commitment.
 
 ## Please read our [wiki](https://github.com/debridmediamanager/zurg-testing/wiki) for more information!
 
