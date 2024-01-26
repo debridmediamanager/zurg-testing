@@ -27,7 +27,7 @@ If Docker, please include your `docker-compose.yml`.
 If Zurg's binary, specify the version by running `./zurg version`
 
 **Logs**
-Provide a link to Zurg logs. Replace the placeholder with the actual IP address: http://replacewithzurgipaddresshere:9999/logs/
+Upload your logs by going to http://ZURGIP:9999/logs/upload and paste the link here
 
 If you are running it in Docker, your container logs will also help.
 
