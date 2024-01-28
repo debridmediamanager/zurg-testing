@@ -29,7 +29,7 @@ services:
       - /dev/fuse:/dev/fuse:rwm
     depends_on:
       - zurg
-    command: "mount zurg: /data --allow-other --dir-cache-time 10s --vfs-cache-mode full"
+    command: "mount zurg: /data --allow-other --allow-non-empty --dir-cache-time 10s --vfs-cache-mode full"
 
 volumes:
   zurgdata:
