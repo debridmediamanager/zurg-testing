@@ -23,7 +23,7 @@ auto_delete_rar_torrents: true
 # network_buffer_size: 4194304 # 4MB
 serve_from_rclone: false
 verify_download_link: false
-force_ipv6: true
+force_ipv6: false
 on_library_update: sh plex_update.sh "$@"
 
 directories:
