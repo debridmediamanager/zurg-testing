@@ -2,6 +2,8 @@
 
 A self-hosted Real-Debrid webdav server written from scratch. Together with [rclone](https://rclone.org/) it can mount your Real-Debrid torrent library into your file system like Dropbox. It's meant to be used with Infuse (webdav server) and Plex (mount zurg webdav with rclone).
 
+[Are you looking for the source code?](https://github.com/debridmediamanager/zurg-testing/issues/53)
+
 ## Download
 
 ### Latest version: v0.9.3-hotfix.6
