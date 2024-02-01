@@ -4,14 +4,14 @@ A self-hosted Real-Debrid webdav server written from scratch. Together with [rcl
 
 ## Download
 
-### Latest version: v0.9.3-hotfix.4
+### Latest version: v0.9.3-hotfix.6
 
-[Download the binary](https://github.com/debridmediamanager/zurg-testing/tree/main/releases/v0.9.3-hotfix.4) or use docker
+[Download the binary](https://github.com/debridmediamanager/zurg-testing/releases) or use docker
 
 ```sh
 docker pull ghcr.io/debridmediamanager/zurg-testing:latest
 # or
-docker pull ghcr.io/debridmediamanager/zurg-testing:v0.9.3-hotfix.4
+docker pull ghcr.io/debridmediamanager/zurg-testing:v0.9.3-hotfix.6
 ```
 
 ## How to run zurg in 5 steps for Plex with Docker
@@ -51,9 +51,9 @@ Use "zurg [command] --help" for more information about a command.
 ## Why zurg? Why not X?
 
 - Better performance than anything out there; changes in your library appear instantly ([assuming Plex picks it up fast enough](./plex_update.sh))
-- You should be able to access every file even if the torrent names are the same so if you have a lot of these, you might notice that zurg will have more files compared to others (e.g. 2 torrents named "Simpsons" but have different seasons, zurg merges all contents in that directory)
-- You can configure a flexible directory structure in `config.yml`; you can select individual torrents that should appear on a directory by the ID you see in [DMM](https://debridmediamanager.com/).
+- You can configure a flexible directory structure in `config.yml`; you can select individual torrents that should appear on a directory by the ID you see in [DMM](https://debridmediamanager.com/). [Need help?](https://github.com/debridmediamanager/zurg-testing/wiki/Config)
 - If you've ever experienced Plex scanner being stuck on a file and thereby freezing Plex completely, it should not happen anymore because zurg does a comprehensive check if a torrent is dead or not. You can run `ps aux --sort=-time | grep "Plex Media Scanner"` to check for stuck scanner processes.
+- zurg guarantees that your library is **always available** because of its repair abilities!
 
 ## Guides
 
@@ -67,6 +67,7 @@ Use "zurg [command] --help" for more information about a command.
 ## Service Providers
 
 - [ElfHosted](https://elfhosted.com) - Easy, [open source](https://elfhosted.com/open/), Kubernetes / GitOps driven hosting of popular self-hosted apps - tested, tightly integrated, and secured. Apps start at $0.05/day, and new accounts get $10 credit, no commitment.
+- [zurg.club](http://zurg.club/) - optimized Plex+zurg server setup for $50/month
 
 ## Please read our [wiki](https://github.com/debridmediamanager/zurg-testing/wiki) for more information!
 
