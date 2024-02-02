@@ -1,29 +1,27 @@
 zurg: v1
 token: yourtoken
-host: "[::]"
-port: 9999
-
+# host: "[::]"
+# port: 9999
 # username:
 # password:
 # proxy:
-concurrent_workers: 50
+# concurrent_workers: 20
 check_for_changes_every_secs: 10
 # repair_every_mins: 60
-ignore_renames: false
-retain_rd_torrent_name: false
-retain_folder_name_extension: false
-expose_full_path: true
+# ignore_renames: false
+# retain_rd_torrent_name: false
+# retain_folder_name_extension: false
 enable_repair: true
 auto_delete_rar_torrents: true
-# api_timeout_secs: 4
-# download_timeout_secs: 2
+# api_timeout_secs: 15
+# download_timeout_secs: 10
 # enable_download_mount: false
-# rate_limit_sleep_secs: 4
+# rate_limit_sleep_secs: 6
 # retries_until_failed: 2
 # network_buffer_size: 4194304 # 4MB
-serve_from_rclone: false
-verify_download_link: false
-force_ipv6: false
+# serve_from_rclone: false
+# verify_download_link: false
+# force_ipv6: false
 on_library_update: sh plex_update.sh "$@"
 
 directories:
