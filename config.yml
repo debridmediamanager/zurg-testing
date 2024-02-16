@@ -24,7 +24,7 @@ auto_delete_rar_torrents: true
 # force_ipv6: false
 on_library_update: sh plex_update.sh "$@"
 #for windows comment the line above and uncomment the line below:
-#on_library_update: '& powershell -ExecutionPolicy Bypass -File .\plex_update.ps1 --% $args'
+#on_library_update: '& powershell -ExecutionPolicy Bypass -File .\plex_update.ps1 --% "$args"'
 
 directories:
   anime:
