@@ -6,14 +6,14 @@ A self-hosted Real-Debrid webdav server written from scratch. Together with [rcl
 
 ## Download
 
-### Latest version: v0.9.3-hotfix.9
+### Latest version: v0.9.3-hotfix.10
 
 [Download the binary](https://github.com/debridmediamanager/zurg-testing/releases) or use docker
 
 ```sh
 docker pull ghcr.io/debridmediamanager/zurg-testing:latest
 # or
-docker pull ghcr.io/debridmediamanager/zurg-testing:v0.9.3-hotfix.9
+docker pull ghcr.io/debridmediamanager/zurg-testing:v0.9.3-hotfix.10
 ```
 
 ## How to run zurg in 5 steps for Plex with Docker
