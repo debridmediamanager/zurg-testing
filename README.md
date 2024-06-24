@@ -80,8 +80,7 @@ Use "zurg [command] --help" for more information about a command.
 
 ## Service Providers
 
-- [ElfHosted](https://elfhosted.com) - Easy, [open source](https://elfhosted.com/open/), Kubernetes / GitOps driven hosting of popular self-hosted apps - tested, tightly integrated, and secured. Apps start at $0.05/day, and new accounts get $11 credit, no commitment.
-- [zurg.club](http://zurg.club/) - optimized Plex+zurg server setup for $50/month
+- [ElfHosted](https://elfhosted.com) - Easy, [open source](https://elfhosted.com/open/), Kubernetes / GitOps driven hosting of popular self-hosted apps - tested, tightly integrated, and secured. Apps start at $0.05/day, and new accounts get $11 credit, no commitment
 
 ## Please read our [wiki](https://github.com/debridmediamanager/zurg-testing/wiki) for more information!
 
