@@ -6,7 +6,7 @@ A self-hosted Real-Debrid webdav server written from scratch. Together with [rcl
 
 [Release Cycle](https://github.com/debridmediamanager/zurg-testing/wiki/Release-cycle)
 
-### Latest version: 2024.07.12-nightly (Sponsors only)
+### Latest version: v0.10.0-rc.4-1 (Sponsors only)
 
 [Download the binary](https://github.com/debridmediamanager/zurg/releases) or use docker
 
@@ -17,7 +17,7 @@ Also the [CONFIG guide for v0.10](https://github.com/debridmediamanager/zurg-tes
 ```sh
 docker pull ghcr.io/debridmediamanager/zurg:latest
 # or
-docker pull ghcr.io/debridmediamanager/zurg:2024.07.12-nightly
+docker pull ghcr.io/debridmediamanager/zurg:v0.10.0-rc.4-1
 ```
 
 ### Stable version: v0.9.3-hotfix.11 (Public)
