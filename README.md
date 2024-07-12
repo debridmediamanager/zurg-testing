@@ -2,20 +2,18 @@
 
 A self-hosted Real-Debrid webdav server written from scratch. Together with [rclone](https://rclone.org/) it can mount your Real-Debrid torrent library into your file system like Dropbox. It's meant to be used with Infuse (webdav server) and Plex (mount zurg webdav with rclone).
 
-[Are you looking for the source code?](https://github.com/debridmediamanager/zurg-testing/issues/53)
-
 ## Download
 
 [Release Cycle](https://github.com/debridmediamanager/zurg-testing/wiki/Release-cycle)
 
-### Latest version: 2024.06.24-nightly (Sponsors only)
+### Latest version: 2024.07.12-nightly (Sponsors only)
 
 [Download the binary](https://github.com/debridmediamanager/zurg/releases) or use docker
 
 ```sh
 docker pull ghcr.io/debridmediamanager/zurg:latest
 # or
-docker pull ghcr.io/debridmediamanager/zurg:2024.06.24-nightly
+docker pull ghcr.io/debridmediamanager/zurg:2024.07.12-nightly
 ```
 
 ### Stable version: v0.9.3-hotfix.11 (Public)
@@ -30,13 +28,13 @@ docker pull ghcr.io/debridmediamanager/zurg-testing:v0.9.3-hotfix.11
 
 ## How to run zurg in 5 steps for Plex with Docker
 
-1. Clone this repo `git clone https://github.com/debridmediamanager/zurg-testing.git`
+1. Clone the repo `git clone https://github.com/debridmediamanager/zurg-testing.git` or `git clone https://github.com/debridmediamanager/zurg.git`
 2. Add your token in `config.yml`
 3. `sudo mkdir -p /mnt/zurg`
 4. Run `docker compose up -d`
 5. `time ls -1R /mnt/zurg` You're done! If you do edits on your config.yml just do `docker compose restart zurg`.
 
-A webdav server is also exposed to your localhost via port `9999`.
+A web server is now running at `localhost:9999`.
 
 ### Note: when using zurg in a server outside of your home network, ensure that "Use my Remote Traffic automatically when needed" is unchecked on your [Account page](https://real-debrid.com/account)
 
@@ -80,7 +78,7 @@ Use "zurg [command] --help" for more information about a command.
 
 ## Service Providers
 
-- [ElfHosted](https://elfhosted.com) - Easy, [open source](https://elfhosted.com/open/), Kubernetes / GitOps driven hosting of popular self-hosted apps - tested, tightly integrated, and secured. Apps start at $0.05/day, and new accounts get $11 credit, no commitment
+- [ElfHosted](https://elfhosted.com) - Easy, [open source](https://elfhosted.com/open/), Kubernetes / GitOps driven hosting of popular self-hosted apps - tested, tightly integrated, and secured. Apps start at $0.05/day, and new accounts get $10 credit, no commitment.
 
 ## Please read our [wiki](https://github.com/debridmediamanager/zurg-testing/wiki) for more information!
 
