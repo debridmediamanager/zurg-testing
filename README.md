@@ -10,6 +10,10 @@ A self-hosted Real-Debrid webdav server written from scratch. Together with [rcl
 
 [Download the binary](https://github.com/debridmediamanager/zurg/releases) or use docker
 
+Instructions on [HOW TO PULL THE PRIVATE DOCKER IMAGE](https://www.patreon.com/posts/guide-to-pulling-105779285)
+
+Also the [CONFIG guide for v0.10](https://github.com/debridmediamanager/zurg-testing/wiki/Config-v0.10)
+
 ```sh
 docker pull ghcr.io/debridmediamanager/zurg:latest
 # or
