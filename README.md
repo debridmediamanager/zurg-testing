@@ -20,14 +20,14 @@ docker pull ghcr.io/debridmediamanager/zurg:latest
 docker pull ghcr.io/debridmediamanager/zurg:v0.10.0-rc.4-1
 ```
 
-### Stable version: v0.9.3-hotfix.11 (Public)
+### Stable version: v0.9.3-final (Public)
 
 [Download the binary](https://github.com/debridmediamanager/zurg-testing/releases) or use docker
 
 ```sh
 docker pull ghcr.io/debridmediamanager/zurg-testing:latest
 # or
-docker pull ghcr.io/debridmediamanager/zurg-testing:v0.9.3-hotfix.11
+docker pull ghcr.io/debridmediamanager/zurg-testing:v0.9.3-final
 ```
 
 ## How to run zurg in 5 steps for Plex with Docker
