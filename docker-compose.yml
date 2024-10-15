@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  zurg:
+    image: ghcr.io/debridmediamanager/zurg-testing:latest    
+    container_name: zurg
+    restart: unless-stopped
+    ports:
+      - 9999:9999
+    volumes:
+      - ./plex_update.sh:/app/plex_update.sh
+      - ./config.yml:/app/config.yml
+      - zurgdata:/app/data
+
+  rclone:
+    image: rclone/rclone:latest
+    container_name: rclone
+    restart: unless-stopped
+    environment:
+      TZ: Europe/Berlin
+      PUID: 1000
+      PGID: 1000
+    volumes:
+      - /mnt/zurg:/data:rshared # CHANGE /mnt/zurg WITH YOUR PREFERRED MOUNT PATH
+      - ./rclone.conf:/config/rclone/rclone.conf
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    devices:
+      - /dev/fuse:/dev/fuse:rwm
+    depends_on:
+      - zurg
+    command: "mount zurg: /data --allow-other --allow-non-empty --dir-cache-time 10s --vfs-cache-mode full"
+
+volumes:
+  zurgdata:
