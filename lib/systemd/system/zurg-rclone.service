@@ -1,0 +1,57 @@
+[Unit]
+Description=Rclone mount for zurg
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+# install rclone with:
+# sudo -v ; curl https://rclone.org/install.sh | sudo bash
+ExecStart=/usr/bin/rclone mount zurg: /mnt/zurg \
+  --config=/home/yowmamasita/.config/rclone/rclone.conf \
+  --log-level=INFO \
+  --log-file=/opt/rclone/logs/zurg.log \
+  --gid=1000 \
+  --uid=1000 \
+  --allow-non-empty \
+  --allow-other \
+  --attr-timeout 10y \
+  --dir-cache-time 60s \
+  --poll-interval 30s \
+  --vfs-cache-mode full \
+  --vfs-refresh \
+  --vfs-read-chunk-size 2M \
+  --vfs-read-chunk-size-limit 64M \
+  --buffer-size 128M \
+  --vfs-read-ahead 128M \
+  --vfs-cache-poll-interval 30s \
+  --vfs-fast-fingerprint \
+  --vfs-cache-max-age 2M \
+  --vfs-cache-max-size 100G \
+  --vfs-cache-min-free-space 1G \
+  --vfs-disk-space-total-size 1T \
+  --transfers 16 \
+  --checkers 16 \
+  --multi-thread-streams 4 \
+  --vfs-read-wait 40ms \
+  --cache-dir=/opt/rclone/cache/zurg
+
+# ExecStop command to unmount the Rclone mount safely
+ExecStop=/bin/bash -c '/bin/fusermount -uz /mnt/zurg; umount /mnt/zurg'
+
+# Restart policy matching Docker's 'restart: unless-stopped'
+Restart=unless-stopped
+RestartSec=5
+
+# Limit the start attempts to prevent rapid restarts
+StartLimitInterval=60s
+StartLimitBurst=3
+
+# Mount dependencies
+# Ensure /mnt/zurg exists and has correct permissions
+# You might need to create this directory and set ownership:
+# sudo mkdir -p /mnt/zurg
+# sudo chown yowmamasita:yowmamasita /mnt/zurg
+
+[Install]
+WantedBy=multi-user.target

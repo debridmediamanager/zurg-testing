@@ -1,10 +1,11 @@
 [Unit]
 Description=zurg
 After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/home/yowmamasita/zurg-linux-amd64
+ExecStart=/home/yowmamasita/zurg-linux-amd64 -c /home/yowmamasita/config.yml
 WorkingDirectory=/home/yowmamasita
 StandardOutput=file:/var/log/zurg.log
 StandardError=file:/var/log/zurg.log
